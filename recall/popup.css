@@ -1,0 +1,560 @@
+/**
+ * Recall Editorial Indigo & Ink - Scenery Design System
+ * Curated radial gradients, glassmorphism layers, soft geometry, and staggered animations.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #12131C;       /* Deep space/twilight base */
+  --bg-secondary: #1B1D2A;     /* Soft Indigo section background */
+  --accent-color: #7F8FF4;     /* Lavender-Blue accent */
+  --accent-light: rgba(127, 143, 244, 0.1); /* Translucent highlight tint */
+  --text-primary: #E6E8F2;     /* Cream Slate main text */
+  --text-muted: #7E839F;       /* Slate grey text */
+  --border-color: rgba(255, 255, 255, 0.05); /* Soft glass border lines */
+  --danger-color: #FF6B6B;     /* Pastel coral for deletions */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: radial-gradient(circle at 50% 0%, #1c1d32 0%, #0b0c10 100%);
+  color: var(--text-primary);
+  width: 380px;
+  height: 500px;
+  overflow: hidden;
+}
+
+/* Custom Soft Fading Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+body:hover::-webkit-scrollbar-thumb,
+.results-container:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.06);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+.hud-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header & Glass Search Bar */
+.hud-header {
+  background-color: rgba(18, 19, 28, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hud-brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.brand-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mode-toggle {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.mode-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+  color: var(--text-primary);
+}
+
+.mode-btn.active {
+  background-color: var(--accent-color);
+  color: #12131C;
+}
+
+.hud-logo {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: linear-gradient(135deg, var(--accent-color), #5765f2);
+  color: #12131c;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(127, 143, 244, 0.25);
+}
+
+.hud-title {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 1.5px;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px rgba(127, 143, 244, 0.15);
+}
+
+.search-wrapper input {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  padding: 10px 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.search-wrapper input:focus {
+  border-color: rgba(127, 143, 244, 0.5);
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(127, 143, 244, 0.12);
+}
+
+/* Glass Filters Row */
+.filters-row {
+  display: flex;
+  background-color: rgba(18, 19, 28, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 16px;
+  gap: 12px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.filter-group label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.filter-group select, 
+.filter-group input {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  padding: 6px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  outline: none;
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.25s ease;
+}
+
+.filter-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%237F8FF4' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  padding-right: 26px;
+  cursor: pointer;
+}
+
+.filter-group select option {
+  background-color: #12131C;
+  color: #E6E8F2;
+}
+
+.filter-group select:focus, 
+.filter-group input:focus {
+  border-color: rgba(127, 143, 244, 0.4);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Results Section */
+.results-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hud-message {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 40px;
+  letter-spacing: 0.5px;
+}
+
+/* Scenery Floating Cards */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 14px;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  position: relative;
+  animation: cardEntrance 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.4s ease, 
+              background-color 0.4s ease, 
+              box-shadow 0.4s ease;
+}
+
+.result-card:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(127, 143, 244, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+}
+
+.card-domain {
+  color: var(--accent-color);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-date {
+  color: var(--text-muted);
+}
+
+/* Translucent Exclusion Button */
+.exclude-btn {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  outline: none;
+  letter-spacing: 0.5px;
+}
+
+.exclude-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background-color: rgba(127, 143, 244, 0.08);
+}
+
+.exclude-btn.armed {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+  color: #12131C;
+}
+
+.card-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.result-card:hover .card-title a {
+  color: #ffffff;
+}
+
+.card-snippet {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Highlight tags with ambient glow */
+.hud-highlight {
+  background-color: rgba(127, 143, 244, 0.15);
+  color: #92a1ff;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+/* Glass Footer */
+.hud-footer {
+  background-color: rgba(18, 19, 28, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-color);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-box {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.settings-btn {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.settings-btn:hover {
+  color: var(--text-primary);
+}
+
+/* Chronological Journey Timelines */
+.journey-group {
+  border-left: 2px solid rgba(127, 143, 244, 0.15);
+  padding-left: 14px;
+  margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  margin-bottom: 8px;
+  animation: cardEntrance 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.journey-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.journey-indicator {
+  position: absolute;
+  left: -5px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(127, 143, 244, 0.6);
+}
+
+.journey-title {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.7rem;
+  color: var(--accent-color);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.journey-time {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* Offline Reader Trigger Button */
+.view-reader-btn {
+  background-color: rgba(127, 143, 244, 0.06);
+  border: 1px solid rgba(127, 143, 244, 0.15);
+  color: var(--accent-color);
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  outline: none;
+  letter-spacing: 0.5px;
+}
+
+.view-reader-btn:hover {
+  background-color: var(--accent-color);
+  color: #12131C;
+}
+
+/* Offline Reader Slide-In Panel */
+.offline-reader {
+  position: absolute;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 0%, #1a1b2e 0%, #0c0d12 100%);
+  z-index: 1000;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.offline-reader.active {
+  right: 0;
+}
+
+.reader-header {
+  background-color: rgba(18, 19, 28, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reader-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reader-domain {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  color: var(--accent-color);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.reader-date {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.close-reader-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  outline: none;
+  padding: 0 4px;
+}
+
+.close-reader-btn:hover {
+  color: var(--danger-color);
+}
+
+.reader-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+}
+
+.reader-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.reader-content {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  line-height: 1.65;
+  white-space: pre-wrap;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  padding-bottom: 40px;
+}
+
+.reader-content mark.hud-highlight {
+  background-color: rgba(127, 143, 244, 0.22);
+  color: #92a1ff;
+  font-weight: 600;
+  border-radius: 2px;
+  padding: 0 2px;
+}

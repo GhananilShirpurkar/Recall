@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Recall HUD</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="hud-container">
+    <!-- Top Header & Search Input -->
+    <header class="hud-header">
+      <div class="hud-brand">
+        <div class="brand-left">
+          <span class="hud-logo">R</span>
+          <span class="hud-title">RECALL</span>
+        </div>
+        <div class="mode-toggle">
+          <button id="flatModeBtn" class="mode-btn active" title="Show flat list of matching cards">FLAT</button>
+          <button id="journeyModeBtn" class="mode-btn" title="Show pages grouped by chronological journey">JOURNEY</button>
+        </div>
+      </div>
+      <div class="search-wrapper">
+        <input 
+          id="searchInput" 
+          type="text" 
+          placeholder="SEARCH WHAT YOU REMEMBER..." 
+          autofocus 
+          autocomplete="off" 
+          spellcheck="false"
+        />
+      </div>
+    </header>
+
+    <!-- Filters Row -->
+    <div class="filters-row">
+      <div class="filter-group">
+        <label for="timeFilter">TIME</label>
+        <select id="timeFilter">
+          <option value="all">ALL_TIME</option>
+          <option value="today">TODAY</option>
+          <option value="week">THIS_WEEK</option>
+          <option value="month">THIS_MONTH</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="domainFilter">DOMAIN</label>
+        <input 
+          id="domainFilter" 
+          type="text" 
+          placeholder="FILTER SITE..." 
+          autocomplete="off" 
+          spellcheck="false"
+        />
+      </div>
+    </div>
+
+    <!-- Main Results Display -->
+    <main class="results-container" id="results">
+      <div class="hud-message">INITIALIZING SEARCH ENGINE...</div>
+    </main>
+
+    <!-- Footer Stats & Settings Link -->
+    <footer class="hud-footer">
+      <div class="stats-box" id="stats">
+        0 PAGES INDEXED
+      </div>
+      <a href="options.html" target="_blank" class="settings-btn" id="settingsBtn">
+        SETTINGS
+      </a>
+    </footer>
+  </div>
+
+  <!-- Offline Reader Slide-In Panel -->
+  <div id="offlineReader" class="offline-reader">
+    <div class="reader-header">
+      <div class="reader-meta">
+        <span id="readerDomain" class="reader-domain">domain.com</span>
+        <span id="readerDate" class="reader-date">Jun 25</span>
+      </div>
+      <button id="closeReaderBtn" class="close-reader-btn">&times;</button>
+    </div>
+    <div class="reader-body">
+      <h1 id="readerTitle" class="reader-title">Page Title</h1>
+      <div id="readerContent" class="reader-content">
+        Page text...
+      </div>
+    </div>
+  </div>
+
+  <script src="lib/minisearch.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

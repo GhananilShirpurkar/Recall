@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Recall // Config Board</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    /* Option-page specific responsive wrapper styles */
+    body {
+      background-color: var(--bg-primary);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      min-height: 100vh;
+      overflow-y: auto;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .options-wrapper {
+      width: 100%;
+      max-width: 600px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-secondary);
+      padding: 30px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    }
+    .section-title {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-top: 0;
+      margin-bottom: 25px;
+      letter-spacing: 0.5px;
+    }
+    .form-group {
+      margin-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .form-group select, 
+    .form-group textarea {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 12px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.88rem;
+      outline: none;
+      border-radius: var(--radius-sm);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .form-group select:focus, 
+    .form-group textarea:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(127, 143, 244, 0.15);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+    .stats-panel {
+      background-color: var(--bg-primary);
+      border-left: 3px solid var(--accent-color);
+      padding: 16px;
+      margin-bottom: 30px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      color: var(--text-primary);
+      line-height: 1.6;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .stats-panel div {
+      margin-bottom: 4px;
+    }
+    .stats-panel span {
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+    .btn-row {
+      display: flex;
+      gap: 15px;
+    }
+    .btn-brutal {
+      flex: 1;
+      background-color: var(--accent-color);
+      color: var(--bg-primary);
+      border: none;
+      padding: 14px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      transition: opacity 0.15s ease, transform 0.1s ease;
+      text-align: center;
+    }
+    .btn-brutal:hover {
+      opacity: 0.9;
+    }
+    .btn-brutal:active {
+      transform: translateY(1px);
+    }
+    .btn-brutal.danger {
+      background-color: transparent;
+      border: 1px solid var(--danger-color);
+      color: var(--danger-color);
+    }
+    .btn-brutal.danger:hover {
+      background-color: var(--danger-color);
+      color: var(--bg-primary);
+    }
+    .status-alert {
+      margin-top: 15px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      color: #00ff66;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="options-wrapper">
+    <h2 class="section-title">RECALL // SYSTEM_CONFIG</h2>
+
+    <!-- Storage Reading Panel -->
+    <div class="stats-panel">
+      <div>DATABASE STATUS: <span id="dbStatus">ONLINE</span></div>
+      <div>PAGES INDEXED: <span id="dbCount">0 PAGES</span></div>
+      <div>ESTIMATED DISK SPACE: <span id="dbSize">0.00 MB</span></div>
+    </div>
+
+    <!-- Configuration Forms -->
+    <div class="form-group">
+      <label for="retentionSelect">RETENTION PERIOD</label>
+      <select id="retentionSelect">
+        <option value="7">7 DAYS (MINIMAL)</option>
+        <option value="30">30 DAYS (BALANCED)</option>
+        <option value="90">90 DAYS (EXTENSIVE)</option>
+        <option value="never">INFINITE (NO PURGING)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="blocklistTextarea">EXCLUDED DOMAINS (ONE PER LINE)</label>
+      <textarea id="blocklistTextarea" placeholder="example.com&#10;private.org"></textarea>
+    </div>
+
+    <!-- Actions -->
+    <div class="btn-row">
+      <button class="btn-brutal" id="saveBtn">SAVE CONFIG //</button>
+      <button class="btn-brutal danger" id="clearBtn">WIPE ALL DATA</button>
+    </div>
+
+    <div class="status-alert" id="statusAlert">// CONFIGURATION SAVED SUCCESSFULLY</div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
